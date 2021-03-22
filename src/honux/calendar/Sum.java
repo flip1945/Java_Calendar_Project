@@ -15,6 +15,6 @@ public class Sum {
 		int firstNumber = Integer.parseInt(splitNumber[0]);
 		int secondNumber = Integer.parseInt(splitNumber[1]);
 		
-		System.out.printf("%d와 %d의 합은 %d입니다.", firstNumber, secondNumber, firstNumber + secondNumber);
+		System.out.printf("%d와 %d의 합은 %d입니다.", firstNumber, secondNumber, firstNumber + secondNumber); 
 	}
 }
