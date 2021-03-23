@@ -21,11 +21,45 @@ public class Calendar {
 		}
 	}
 	
-	public void printCalendar(int year, int month, int weekday) {
+	public int getDaysOfLeapYear(int year) {
+		int days = 0;
+		for(int i = 1583; i < year; i++) {
+			if(isLeapYear(i)) {
+				days++;
+			}
+		}
+		return days;
+	}
+	
+	public int getFisrtWeekdayOfYear(int year) {
+		return (year-1583-1+getDaysOfLeapYear(year)) % 7;
+	}
+	
+	public int getFirstWeekdayOfMonth(int firstWeekday, boolean leapYear, int month) {
+		int totalDays = 0;
+		int[] maxDaysOfMonth = new int[12];
 		
+		if(leapYear) {
+			maxDaysOfMonth = LEAP_MAX_DAYS;
+		} else {
+			maxDaysOfMonth = MAX_DAYS;
+		}
+		
+		for(int i = 0; i < month - 1; i++) {
+			totalDays += maxDaysOfMonth[i];
+		}
+		
+		return (totalDays + firstWeekday) % 7;
+	}
+	
+	public void printCalendar(int year, int month) {
+		
+		boolean leapYear = isLeapYear(year);
 		int maxDay = getMaxDaysOfMonth(year, month);
+		int firstWeekdayOfYear = getFisrtWeekdayOfYear(year);
+		int weekday = getFirstWeekdayOfMonth(firstWeekdayOfYear, leapYear, month);
 		
-		System.out.printf("    <<%4d년%3d월>>\n", year, month);
+		System.out.printf("    <<%d년 %d월>>\n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("---------------------");
 		
